@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import components.KeyHandler;
+import component.KeyHandler;
 import entity.*;
 
 public class GamePanel extends JPanel implements Runnable
@@ -83,11 +83,8 @@ public class GamePanel extends JPanel implements Runnable
     public void start()
     {
 
-        entityList.add(new Player(100, 100, 4));
-        entityList.add(new Player(200, 100, 4));
+        entityList.add(new Player(400, 400, 4));
         System.out.println(entityList.size());
-
-        ((Player)entityList.get(0)).PrintPlayerValues();
     }
 
     public void update()
