@@ -24,7 +24,7 @@ public class Animation
         {
             for(int i = _startFrame; i <= _endFrame; i++)
             {
-                animationFrames.add(ImageIO.read(getClass().getResourceAsStream("/player/player_" + i + ".png")));
+                animationFrames.add(ImageIO.read(getClass().getResourceAsStream("/sprite/player/player_" + i + ".png")));
             }
         }
         catch (IOException e)
@@ -33,8 +33,6 @@ public class Animation
         }
 
         frameCount = (_endFrame - _startFrame) + 1;
-
-        System.out.println("Animation created with frame count of " + frameCount);
     }
 
 

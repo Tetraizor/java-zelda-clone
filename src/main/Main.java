@@ -18,10 +18,10 @@ public class Main
         window.setResizable(false);
 
         // Set window name.
-        window.setTitle("Game 2D");
+        window.setTitle("Zelda");
 
         // Create Scene
-        currentGamePanel = new GamePanel();
+        currentGamePanel = new GamePanel(0);
         window.add(currentGamePanel);
 
         window.pack();

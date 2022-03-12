@@ -5,14 +5,16 @@ import java.awt.*;
 import java.util.ArrayList;
 
 import component.KeyHandler;
+import component.TileManager;
 import entity.*;
+import resource.Tile;
 
 public class GamePanel extends JPanel implements Runnable
 {
     // *------ Screen Settings ------*
     public final static int originalTileSize = 16;
 
-    public final static int scaleFactor = 3; // Multiply each pixel to make it bigger.
+    public final static int scaleFactor = 4; // Multiply each pixel to make it bigger.
 
     public final static int tileSize = originalTileSize * scaleFactor;
 
@@ -22,6 +24,8 @@ public class GamePanel extends JPanel implements Runnable
     public final static int screenHeight = row * tileSize;
     public final static int screenWidth = column * tileSize;
 
+    public int mapIndex;
+
     // *------ Threading ------*
     Thread gameThread;
     final int fpsCap = 60;
@@ -29,14 +33,16 @@ public class GamePanel extends JPanel implements Runnable
     // *------ Debug ------*
     public ArrayList<Entity> entityList = new ArrayList<Entity>();
     public static KeyHandler mainKeyHandler = new KeyHandler();
+    public TileManager tileManager = new TileManager(mapIndex, column, row);
 
-    public GamePanel()
+    public GamePanel(int mapIndex)
     {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.addKeyListener(mainKeyHandler);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        this.mapIndex = mapIndex;
     }
 
     // Start Game
@@ -83,8 +89,8 @@ public class GamePanel extends JPanel implements Runnable
     public void start()
     {
 
-        entityList.add(new Player(400, 400, 4));
-        System.out.println(entityList.size());
+        entityList.add(new Player(400, 400, scaleFactor));
+
     }
 
     public void update()
@@ -98,6 +104,8 @@ public class GamePanel extends JPanel implements Runnable
         super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D)g;
+
+        tileManager.draw(g2D);
 
         for(Entity entity : entityList)
             entity.render(g2D);

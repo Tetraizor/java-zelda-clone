@@ -49,7 +49,6 @@ public class Entity
     public Entity()
     {
         SetEntityProperties(0, 0, 1);
-        System.out.println("Default entity constructor called.");
 
         start();
     }

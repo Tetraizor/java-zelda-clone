@@ -41,14 +41,10 @@ public class AnimationManager
         currentAnimation = _index;
         currentFrame = 0;
         time = 0;
-
-        System.out.println("Switched animation.");
     }
 
     public void update()
     {
-        System.out.println(time);
-
         if (animations.get(currentAnimation) == null)
             return;
 
@@ -63,8 +59,6 @@ public class AnimationManager
 
         if(time == 1)
         {
-            System.out.println(currentFrame);
-
             currentImage = animations.get(currentAnimation).animationFrames.get(currentFrame);
 
             if (currentFrame == animations.get(currentAnimation).frameCount - 1)
