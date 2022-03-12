@@ -6,6 +6,7 @@ import main.Main;
 import main.GamePanel;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.*;
 import java.io.IOException;
 
@@ -31,6 +32,11 @@ public class Player extends Entity
         InputHandler();
     }
 
+    public void render(Graphics2D g2D)
+    {
+        super.render(g2D);
+    }
+
     void InputHandler()
     {
         if(playerKeyHandler.keyList.get(0).isButtonDown)
@@ -41,5 +47,10 @@ public class Player extends Entity
             x += speed;
         if(playerKeyHandler.keyList.get(3).isButtonDown)
             x -= speed;
+    }
+
+    public void PrintPlayerValues()
+    {
+        System.out.println("Player position: " + this.x + ", " + this.y);
     }
 }

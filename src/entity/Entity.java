@@ -47,7 +47,7 @@ public class Entity
 
     public void update()
     {
-        // System.out.println("Position: " + x + ", " + y);
+
     }
 
     public void render(Graphics2D g2D)

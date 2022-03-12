@@ -2,9 +2,10 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 import components.KeyHandler;
-import entity.Player;
+import entity.*;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -26,7 +27,7 @@ public class GamePanel extends JPanel implements Runnable
     final int fpsCap = 60;
 
     // *------ Debug ------*
-    public Player player;
+    public ArrayList<Entity> entityList = new ArrayList<Entity>();
     public static KeyHandler mainKeyHandler = new KeyHandler();
 
     public GamePanel()
@@ -46,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     @Override
-    public void run() // START FUNCTION
+    public void run()
     {
         System.out.println("*------Game Started------*");
 
@@ -81,14 +82,18 @@ public class GamePanel extends JPanel implements Runnable
 
     public void start()
     {
-        System.out.println("Aboo");
-        player = new Player(100, 100, 4);
+
+        entityList.add(new Player(100, 100, 4));
+        entityList.add(new Player(200, 100, 4));
+        System.out.println(entityList.size());
+
+        ((Player)entityList.get(0)).PrintPlayerValues();
     }
 
     public void update()
     {
-        if(player != null)
-        player.update();
+        for(Entity entity : entityList)
+            entity.update();
     }
 
     public void paintComponent(Graphics g)
@@ -97,8 +102,8 @@ public class GamePanel extends JPanel implements Runnable
 
         Graphics2D g2D = (Graphics2D)g;
 
-        if(player != null)
-        player.render(g2D);
+        for(Entity entity : entityList)
+            entity.render(g2D);
 
         g2D.dispose();
     }
