@@ -54,7 +54,17 @@ public class TileManager
                 String[] line = br.readLine().split(" ");
                 for (int x = 0; x < height; x++)
                 {
-                    map[y][x] = tileList.get(Integer.parseInt(line[x]));
+                    int tileIndex = Integer.parseInt(line[x]);
+                    if(tileIndex < tileList.size())
+                    {
+                        map[y][x] = tileList.get(tileIndex);
+                    }
+                    else
+                    {
+                        map[y][x] = tileList.get(0);
+                        System.out.println("TileList does not contain item with index " + tileIndex + ", creating grass instead.");
+                    }
+
                 }
             }
         }

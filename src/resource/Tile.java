@@ -17,6 +17,15 @@ public class Tile
         }
         catch (IOException e)
         {
+            System.out.println("Tile not found. Creating grass tile instead.");
+            try
+            {
+                image = ImageIO.read(getClass().getResourceAsStream("/sprite/environment/tile_" + 0 + ".png"));
+            }
+            catch (IOException ex)
+            {
+                ex.printStackTrace();
+            }
             e.printStackTrace();
         }
     }
