@@ -73,8 +73,19 @@ public class TileManager
         {
             e.printStackTrace();
         }
+    }
 
+    public Tile WorldCoordinateToTile(int x, int y)
+    {
 
+        return map[3][2];
+    }
+
+    public int[] WorldCoordinateToTileCoordinate(int x, int y)
+    {
+        int[] coordinates = new int[2];
+        coordinates[0] = 1;
+        return coordinates;
     }
 
     public void draw(Graphics2D g2D)
@@ -83,7 +94,7 @@ public class TileManager
         {
             for (int x = 0; x < height; x++)
             {
-                RenderUtils.DrawSprite(x * GamePanel.tileSize, y * GamePanel.tileSize, map[y][x].image, true, g2D);
+                RenderUtils.DrawSprite(x * GamePanel.originalTileSize, y * GamePanel.originalTileSize, map[y][x].image, true, g2D);
             }
         }
     }

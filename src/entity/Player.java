@@ -1,6 +1,7 @@
 package entity;
 
 import component.AnimationManager;
+import component.Collider;
 
 import java.awt.*;
 
@@ -29,6 +30,8 @@ public class Player extends Entity
         animationManager.CreateAnimation("player", 8, 11, 10); // Walk Up
         animationManager.CreateAnimation("player", 12, 15, 10); // Walk Left
 
+        collider = new Collider(this, 4, 7, 9, 9);
+
     }
 
     public void update()
@@ -48,7 +51,6 @@ public class Player extends Entity
         {
             animationManager.SwitchAnimation((int)(entityDirection.getValue()));
         }
-
     }
 
     public void render(Graphics2D g2D)

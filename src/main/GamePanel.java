@@ -93,7 +93,7 @@ public class GamePanel extends JPanel implements Runnable
     public void start()
     {
 
-        entityList.add(new Player(400, 400, scaleFactor));
+        entityList.add(new Player(12 * originalTileSize, 7 * originalTileSize, 1));
         mainCamera.SetTarget(entityList.get(0));
 
     }

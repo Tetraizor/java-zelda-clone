@@ -43,9 +43,9 @@ public class Camera
 
     public Boolean IsInsideBoundaries(int _x, int _y, int _offset)
     {
-        if(_x <= (x + GamePanel.screenWidth / 2) + _offset && _x >= (x - GamePanel.screenWidth / 2) - _offset)
+        if(_x <= (x + GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) + _offset && _x >= (x - GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) - _offset)
         {
-            if(_y <= (y + GamePanel.screenHeight / 2) + _offset && _y >= (y - GamePanel.screenHeight / 2) - _offset)
+            if(_y <= (y + GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) + _offset && _y >= (y - GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) - _offset)
             {
                 return true;
             }
@@ -56,9 +56,9 @@ public class Camera
 
     public Boolean IsInsideBoundaries(int _x, int _y)
     {
-        if(_x <= (x + GamePanel.screenWidth / 2) && _x >= (x - GamePanel.screenWidth / 2))
+        if(_x <= (x + GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) && _x >= (x - GamePanel.screenWidth / (2 * GamePanel.scaleFactor)))
         {
-            if(_y <= (y + GamePanel.screenHeight / 2) && _y >= (y - GamePanel.screenHeight / 2))
+            if(_y <= (y + GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) && _y >= (y - GamePanel.screenHeight / (2 * GamePanel.scaleFactor)))
             {
                 return true;
             }
