@@ -2,6 +2,7 @@ package component;
 
 import main.GamePanel;
 import resource.Tile;
+import util.RenderUtils;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -82,7 +83,7 @@ public class TileManager
         {
             for (int x = 0; x < height; x++)
             {
-                g2D.drawImage(map[y][x].image, x * GamePanel.tileSize, y * GamePanel.tileSize, GamePanel.tileSize, GamePanel.tileSize, null);
+                RenderUtils.DrawSprite(x * GamePanel.tileSize, y * GamePanel.tileSize, map[y][x].image, true, g2D);
             }
         }
     }

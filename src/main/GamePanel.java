@@ -4,8 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-import component.KeyHandler;
-import component.TileManager;
+import component.*;
+
 import entity.*;
 import resource.Tile;
 
@@ -14,7 +14,7 @@ public class GamePanel extends JPanel implements Runnable
     // *------ Screen Settings ------*
     public final static int originalTileSize = 16;
 
-    public final static int scaleFactor = 4; // Multiply each pixel to make it bigger.
+    public final static int scaleFactor = 3; // Multiply each pixel to make it bigger.
 
     public final static int tileSize = originalTileSize * scaleFactor;
 
@@ -23,6 +23,8 @@ public class GamePanel extends JPanel implements Runnable
 
     public final static int screenHeight = row * tileSize;
     public final static int screenWidth = column * tileSize;
+
+    public static GamePanel instance;
 
     public int mapIndex;
 
@@ -34,6 +36,7 @@ public class GamePanel extends JPanel implements Runnable
     public ArrayList<Entity> entityList = new ArrayList<Entity>();
     public static KeyHandler mainKeyHandler = new KeyHandler();
     public TileManager tileManager = new TileManager(mapIndex, column, row);
+    public Camera mainCamera = new Camera(16, 16);
 
     public GamePanel(int mapIndex)
     {
@@ -43,6 +46,7 @@ public class GamePanel extends JPanel implements Runnable
         this.setDoubleBuffered(true);
         this.setFocusable(true);
         this.mapIndex = mapIndex;
+        instance = this;
     }
 
     // Start Game
@@ -90,11 +94,13 @@ public class GamePanel extends JPanel implements Runnable
     {
 
         entityList.add(new Player(400, 400, scaleFactor));
+        mainCamera.SetTarget(entityList.get(0));
 
     }
 
     public void update()
     {
+        mainCamera.update();
         for(Entity entity : entityList)
             entity.update();
     }

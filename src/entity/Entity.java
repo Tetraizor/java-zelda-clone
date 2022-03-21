@@ -4,6 +4,7 @@ import component.AnimationManager;
 import component.KeyHandler;
 import main.GamePanel;
 import main.Main;
+import util.RenderUtils;
 
 import java.awt.*;
 
@@ -73,7 +74,6 @@ public class Entity
 
     public void render(Graphics2D g2D)
     {
-        g2D.setColor(Color.red);
-        g2D.drawImage(animationManager.currentImage, x, y, GamePanel.tileSize, GamePanel.tileSize, null);
+        RenderUtils.DrawSprite(x, y, animationManager.currentImage, true, g2D);
     }
 }
