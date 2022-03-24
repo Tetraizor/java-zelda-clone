@@ -61,33 +61,76 @@ public class GamePanel extends JPanel implements Runnable
     {
         System.out.println("*------Game Started------*");
 
-        double drawInterval = 1000000000/fpsCap;
-        double delta = 0;
-        long lastTime = System.nanoTime();
-        long currentTime;
+        boolean isRunning = true;
+        boolean render = false;
+
+        double firstTime = 0;
+        double lastTime = System.nanoTime() / 1000000000.0;
+        double passedTime = 0;
+        double unprocessedTime = 0;
+
+        double frameTime = 0;
+        int frames = 0;
+        int fps = 0;
 
         // Start Function
         start();
 
         // Start game loop
-        while(gameThread != null)
+        while(isRunning)
         {
-            currentTime = System.nanoTime();
-            delta += (currentTime - lastTime) / drawInterval;
+            render = false;
 
-            lastTime = currentTime;
+            firstTime = System.nanoTime() / 1000000000.0;
+            passedTime = firstTime - lastTime;
+            lastTime = firstTime;
 
-            if(delta >= 1)
+            unprocessedTime += passedTime;
+            frameTime += passedTime;
+
+            while(unprocessedTime >= 1.0/60.0)
             {
-                // Update every frame
+                unprocessedTime -= 1.0/60.0;
+                render = true;
+
+                // TODO: Update game
                 update();
 
-                // Render screen
-                repaint();
+                if(frameTime >= 1.0)
+                {
+                    frameTime = 0;
+                    fps = frames;
+                    frames = 0;
 
-                delta--;
+                    System.out.println("FPS: " + fps);
+                }
+            }
+
+            if(render)
+            {
+                // TODO: Render
+                repaint();
+                frames++;
+            }
+            else
+            {
+                try
+                {
+                    Thread.sleep(1);
+                }
+                catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
             }
         }
+
+        dispose();
+    }
+
+    private void dispose()
+    {
+
     }
 
     public void start()
