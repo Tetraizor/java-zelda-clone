@@ -8,6 +8,7 @@ import component.*;
 
 import entity.*;
 import resource.Tile;
+import util.Vector2;
 
 public class GamePanel extends JPanel implements Runnable
 {
@@ -136,7 +137,7 @@ public class GamePanel extends JPanel implements Runnable
     public void start()
     {
 
-        entityList.add(new Player(12 * originalTileSize, 7 * originalTileSize, 1));
+        entityList.add(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1));
         mainCamera.SetTarget(entityList.get(0));
 
     }

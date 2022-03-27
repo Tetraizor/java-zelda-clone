@@ -6,14 +6,15 @@ import component.KeyHandler;
 import main.GamePanel;
 import main.Main;
 import util.RenderUtils;
+import util.Vector2;
 
 import java.awt.*;
 
 public class Entity
 {
-    public int x;
-    public int y;
-    public int speed;
+    public String name;
+    public Vector2 position;
+    public float speed;
 
     public enum Direction
     {
@@ -42,24 +43,23 @@ public class Entity
     AnimationManager animationManager;
     Collider collider;
 
-    public Entity(int _x, int _y)
+    public Entity(String name, int _x, int _y)
     {
-        SetEntityProperties(x, y, 1);
+        SetEntityProperties(name, new Vector2(position.x, position.y), 1);
 
         start();
     }
 
     public Entity()
     {
-        SetEntityProperties(0, 0, 1);
-
+        SetEntityProperties("New Entity", new Vector2(0, 0), 1);
         start();
     }
 
-    void SetEntityProperties(int _x, int _y, int _speed)
+    void SetEntityProperties(String name, Vector2 _position, float _speed)
     {
-        x = _x;
-        y = _y;
+        this.name = name;
+        position = _position;
         speed = _speed;
     }
 
@@ -77,7 +77,7 @@ public class Entity
 
     public void render(Graphics2D g2D)
     {
-        RenderUtils.DrawSprite(x, y, animationManager.currentImage, true, g2D);
+        RenderUtils.DrawSprite(position.x, position.y, animationManager.currentImage, true, g2D);
         collider.render(g2D);
     }
 }

@@ -2,10 +2,11 @@ package component;
 
 import entity.Entity;
 import main.GamePanel;
+import util.Vector2;
 
 public class Camera
 {
-    public int x, y;
+    public Vector2 position;
     public Entity target;
 
     public Camera(int xPosition, int yPosition)
@@ -24,7 +25,7 @@ public class Camera
         if(target == null)
             return;
 
-        SetPosition(target.x, target.y);
+        SetPosition(target.position.x, target.position.y);
     }
 
     public void SetTarget(Entity _target)
@@ -32,20 +33,19 @@ public class Camera
         target = _target;
     }
 
-    public void SetPosition(int x, int y)
+    public void SetPosition(float x, float y)
     {
         // Clamp position
 
-        this.x = x;
-        this.y = y;
+        this.position = new Vector2(x, y);
 
     }
 
-    public Boolean IsInsideBoundaries(int _x, int _y, int _offset)
+    public Boolean IsInsideBoundaries(float _x, float _y, float _offset)
     {
-        if(_x <= (x + GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) + _offset && _x >= (x - GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) - _offset)
+        if(_x <= (position.x + (float)GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) + _offset && _x >= (position.x - (float)GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) - _offset)
         {
-            if(_y <= (y + GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) + _offset && _y >= (y - GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) - _offset)
+            if(_y <= (position.y + (float)GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) + _offset && _y >= (position.y - (float)GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) - _offset)
             {
                 return true;
             }
@@ -54,11 +54,11 @@ public class Camera
         return false;
     }
 
-    public Boolean IsInsideBoundaries(int _x, int _y)
+    public Boolean IsInsideBoundaries(float _x, float _y)
     {
-        if(_x <= (x + GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) && _x >= (x - GamePanel.screenWidth / (2 * GamePanel.scaleFactor)))
+        if(_x <= (position.x + (float)GamePanel.screenWidth / (2 * GamePanel.scaleFactor)) && _x >= (position.x - (float)GamePanel.screenWidth / (2 * GamePanel.scaleFactor)))
         {
-            if(_y <= (y + GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) && _y >= (y - GamePanel.screenHeight / (2 * GamePanel.scaleFactor)))
+            if(_y <= (position.y + (float)GamePanel.screenHeight / (2 * GamePanel.scaleFactor)) && _y >= (position.y - (float)GamePanel.screenHeight / (2 * GamePanel.scaleFactor)))
             {
                 return true;
             }

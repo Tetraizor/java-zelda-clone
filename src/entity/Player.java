@@ -2,6 +2,7 @@ package entity;
 
 import component.AnimationManager;
 import component.Collider;
+import util.Vector2;
 
 import java.awt.*;
 
@@ -9,9 +10,9 @@ public class Player extends Entity
 {
     public Boolean isMoving = false;
 
-    public Player(int _x, int _y, int _speed)
+    public Player(String _name, Vector2 _position, int _speed)
     {
-        SetEntityProperties(_x, _y, _speed);
+        SetEntityProperties(_name, new Vector2(_position.x, _position.y), _speed);
     }
 
     public void start()
@@ -63,37 +64,47 @@ public class Player extends Entity
     {
         isMoving = false;
 
+        Vector2 moveVector = new Vector2(0, 0);
+
         if(playerKeyHandler.keyList.get(0).isButtonDown)
         {
             entityDirection = Direction.UP;
-            y -= speed;
+            moveVector.y = -speed;
             isMoving = true;
         }
 
         if(playerKeyHandler.keyList.get(1).isButtonDown)
         {
             entityDirection = Direction.DOWN;
-            y += speed;
+            moveVector.y = speed;
             isMoving = true;
         }
 
         if(playerKeyHandler.keyList.get(2).isButtonDown)
         {
             entityDirection = Direction.RIGHT;
-            x += speed;
+            moveVector.x = speed;
             isMoving = true;
         }
 
         if(playerKeyHandler.keyList.get(3).isButtonDown)
         {
             entityDirection = Direction.LEFT;
-            x -= speed;
+            moveVector.x = -speed;
             isMoving = true;
         }
+
+        System.out.println(moveVector);
+
+        moveVector.Normalize();
+
+        System.out.println(moveVector);
+
+        position.Add(moveVector);
     }
 
     public void PrintPlayerValues()
     {
-        System.out.println("Player position: " + this.x + ", " + this.y);
+        System.out.println("Player position: " + this.position.x + ", " + this.position.y);
     }
 }

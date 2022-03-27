@@ -5,6 +5,7 @@ import main.GamePanel;
 import util.RenderUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 public class Collider
 {
@@ -12,8 +13,11 @@ public class Collider
     int xPos = 0, yPos = 0;
     int xOffset = 0, yOffset = 0;
 
+    public static ArrayList<Collider> colliderList = new ArrayList<Collider>();
+
     public Collider(Entity _parent, int _xPos, int _yPos, int _xOffset, int _yOffset)
     {
+        colliderList.add(this);
         parent = _parent;
         xPos = _xPos;
         yPos = _yPos;
@@ -36,6 +40,10 @@ public class Collider
         switch(parent.entityDirection)
         {
             case DOWN:
+                for(Collider collider : colliderList)
+                {
+                    
+                }
                 break;
 
             case UP:
@@ -52,6 +60,6 @@ public class Collider
     public void render(Graphics2D g2D)
     {
         g2D.setColor(Color.red);
-        RenderUtils.DrawRect(parent.x + xPos, parent.y + yPos, xOffset, yOffset, Color.red, g2D);
+        RenderUtils.DrawRect(parent.position.x + xPos, parent.position.y + yPos, xOffset, yOffset, Color.red, g2D);
     }
 }
