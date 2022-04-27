@@ -24,7 +24,7 @@ public class Animation
         {
             for(int i = _startFrame; i <= _endFrame; i++)
             {
-                animationFrames.add(ImageIO.read(getClass().getResourceAsStream("/sprite/player/player_" + i + ".png")));
+                animationFrames.add(ImageIO.read(getClass().getResourceAsStream("/sprite/"+ name +"/" + name + "_" + i + ".png")));
             }
         }
         catch (IOException e)

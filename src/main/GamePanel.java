@@ -138,6 +138,11 @@ public class GamePanel extends JPanel implements Runnable
     {
 
         entityList.add(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1));
+        entityList.add(new Enemy(new Vector2(12 * originalTileSize, 5 * originalTileSize)));
+        entityList.add(new Enemy(new Vector2(13 * originalTileSize, 5 * originalTileSize)));
+        entityList.add(new Enemy(new Vector2(14 * originalTileSize, 5 * originalTileSize)));
+        entityList.add(new Enemy(new Vector2(15 * originalTileSize, 5 * originalTileSize)));
+        entityList.add(new Enemy(new Vector2(16 * originalTileSize, 5 * originalTileSize)));
         mainCamera.SetTarget(entityList.get(0));
 
     }

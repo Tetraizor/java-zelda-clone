@@ -2,6 +2,9 @@ package entity;
 
 import component.AnimationManager;
 import component.Collider;
+import component.TileManager;
+import main.GamePanel;
+import resource.Collision;
 import util.Vector2;
 
 import java.awt.*;
@@ -41,6 +44,9 @@ public class Player extends Entity
         // Update Entity class as well.
         super.update();
 
+        // Handle collisions
+
+
         // Handle inputs on separate function.
         InputHandler();
 
@@ -52,6 +58,8 @@ public class Player extends Entity
         {
             animationManager.SwitchAnimation((int)(entityDirection.getValue()));
         }
+
+        SwingWeapon();
     }
 
     public void render(Graphics2D g2D)
@@ -73,38 +81,49 @@ public class Player extends Entity
             isMoving = true;
         }
 
-        if(playerKeyHandler.keyList.get(1).isButtonDown)
+        else if(playerKeyHandler.keyList.get(1).isButtonDown)
         {
             entityDirection = Direction.DOWN;
             moveVector.y = speed;
             isMoving = true;
         }
 
-        if(playerKeyHandler.keyList.get(2).isButtonDown)
+        else if(playerKeyHandler.keyList.get(2).isButtonDown)
         {
             entityDirection = Direction.RIGHT;
             moveVector.x = speed;
             isMoving = true;
         }
 
-        if(playerKeyHandler.keyList.get(3).isButtonDown)
+        else if(playerKeyHandler.keyList.get(3).isButtonDown)
         {
             entityDirection = Direction.LEFT;
             moveVector.x = -speed;
             isMoving = true;
         }
 
-        System.out.println(moveVector);
+        collider.CheckForCollisions();
 
         moveVector.Normalize();
 
-        System.out.println(moveVector);
-
-        position.Add(moveVector);
+        for (Collision collision : collider.collisions) {
+            if(collision.direction == entityDirection)
+                isMoving = false;
+        }
+        if(isMoving)
+            position.Add(moveVector);
     }
 
     public void PrintPlayerValues()
     {
         System.out.println("Player position: " + this.position.x + ", " + this.position.y);
+    }
+
+    public void SwingWeapon()
+    {
+        for(Collision collision : collider.collisions)
+            if(collision.collisionType == Collision.CollisionType.ENTITY){
+                System.out.println(collision.entity.name);
+            }
     }
 }
