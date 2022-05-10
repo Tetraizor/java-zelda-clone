@@ -2,12 +2,15 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import component.*;
 
 import entity.*;
 import resource.Tile;
+import util.GameSetupManager;
+import util.ImageUtils;
 import util.Vector2;
 
 public class GamePanel extends JPanel implements Runnable
@@ -75,7 +78,11 @@ public class GamePanel extends JPanel implements Runnable
         int fps = 0;
 
         // Start Function
-        start();
+        try {
+            start();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         // Start game loop
         while(isRunning)
@@ -134,8 +141,8 @@ public class GamePanel extends JPanel implements Runnable
 
     }
 
-    public void start()
-    {
+    public void start() throws IOException {
+        GameSetupManager.SetupImages(Color.red);
 
         entityList.add(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1));
         entityList.add(new Enemy(new Vector2(12 * originalTileSize, 5 * originalTileSize)));

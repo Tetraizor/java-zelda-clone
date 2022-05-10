@@ -9,20 +9,17 @@ public class Vector2
         this.y = y;
     }
 
-    public Vector2 Normalize()
+    public void Normalize()
     {
         if(x == 0 && y == 0)
         {
             this.x = 0;
             this.y = 0;
-            return this;
         }
 
         float length = (float)Math.sqrt(x * x + y * y);
         x = x / length;
         y = y / length;
-
-        return this;
     }
 
 

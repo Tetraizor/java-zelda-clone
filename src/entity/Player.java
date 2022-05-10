@@ -23,16 +23,16 @@ public class Player extends Entity
         super.start();
 
         // Walk
-        animationManager.CreateAnimation("player", 1, 1, 10); // Idle Down
-        animationManager.CreateAnimation("player", 5, 5, 10); // Idle Right
-        animationManager.CreateAnimation("player", 9, 9, 10); // Idle Up
-        animationManager.CreateAnimation("player", 13, 13, 10); // Idle Left
+        animationManager.CreateAnimation("/sprite/player/edited/player", 1, 1, 10); // Idle Down
+        animationManager.CreateAnimation("/sprite/player/edited/player", 5, 5, 10); // Idle Right
+        animationManager.CreateAnimation("/sprite/player/edited/player", 9, 9, 10); // Idle Up
+        animationManager.CreateAnimation("/sprite/player/edited/player", 13, 13, 10); // Idle Left
 
         // Idle
-        animationManager.CreateAnimation("player", 0, 3, 10); // Walk Down
-        animationManager.CreateAnimation("player", 4, 7, 10); // Walk Right
-        animationManager.CreateAnimation("player", 8, 11, 10); // Walk Up
-        animationManager.CreateAnimation("player", 12, 15, 10); // Walk Left
+        animationManager.CreateAnimation("/sprite/player/edited/player", 0, 3, 10); // Walk Down
+        animationManager.CreateAnimation("/sprite/player/edited/player", 4, 7, 10); // Walk Right
+        animationManager.CreateAnimation("/sprite/player/edited/player", 8, 11, 10); // Walk Up
+        animationManager.CreateAnimation("/sprite/player/edited/player", 12, 15, 10); // Walk Left
 
         collider = new Collider(this, 4, 7, 9, 9);
 

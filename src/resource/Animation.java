@@ -1,9 +1,12 @@
 package resource;
 
+import util.ImageUtils;
+
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Animation
 {
@@ -14,7 +17,7 @@ public class Animation
 
     public ArrayList<BufferedImage> animationFrames = new ArrayList<BufferedImage>();
 
-    public Animation(String name, int _startFrame, int _endFrame, int _speed)
+    public Animation(String path, int _startFrame, int _endFrame, int _speed)
     {
         this.startFrame = _startFrame;
         this.endFrame = _endFrame;
@@ -24,7 +27,7 @@ public class Animation
         {
             for(int i = _startFrame; i <= _endFrame; i++)
             {
-                animationFrames.add(ImageIO.read(getClass().getResourceAsStream("/sprite/"+ name +"/" + name + "_" + i + ".png")));
+                animationFrames.add(ImageUtils.ReadImage(path + "_" + i + ".png"));
             }
         }
         catch (IOException e)

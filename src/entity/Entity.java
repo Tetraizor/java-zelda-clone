@@ -71,7 +71,6 @@ public class Entity
     public void update()
     {
         animationManager.update();
-        collider.update();
     }
 
     public void render(Graphics2D g2D)

@@ -13,11 +13,13 @@ import java.util.ArrayList;
 public class Collider
 {
     Entity parent;
+
     int xOffset = 0, yOffset = 0;
     int sizeX = 0, sizeY = 0;
-    Vector2[] posCheck = {new Vector2(0, 0), new Vector2(0, 0)};
-    public ArrayList<Collision> collisions = new ArrayList<Collision>();
 
+    Vector2[] posCheck = {new Vector2(0, 0), new Vector2(0, 0)};
+
+    public ArrayList<Collision> collisions = new ArrayList<Collision>();
     public static ArrayList<Collider> colliderList = new ArrayList<Collider>();
 
     public Collider(Entity _parent, int _xOffset, int _yOffset, int _sizeX, int _sizeY)
@@ -125,11 +127,6 @@ public class Collider
             if(_pos.y >= parent.position.y + yOffset && _pos.y <= parent.position.y + yOffset + sizeY)
                 return true;
         return false;
-    }
-
-    public void update()
-    {
-
     }
 
     public void render(Graphics2D g2D)
