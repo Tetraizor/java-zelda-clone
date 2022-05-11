@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="b98faafb-55b7-4fe3-ad02-756fa42a9a7a" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/.gitattributes" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Game2D.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/art/concept.pyxel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/art/enviroment.pyxel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/art/player.pyxel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/art/slime.pyxel" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/map/map0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/environment/tile_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/player/original/player_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Game2D/sprite/slime/slime_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/map/map0.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/environment/tile_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/edited/player_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/player/original/player_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_0.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_10.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_11.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_12.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_13.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_14.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_15.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_3.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_4.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_5.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_6.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_8.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/res/sprite/slime/slime_9.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/AnimationManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Camera.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/Collider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/KeyHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/component/TileManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Enemy.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Entity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entity/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/GamePanel.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resource/Animation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resource/Collision.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/resource/Tile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/GameSetupManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/ImageUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/RenderUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/Vector2.java" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2925XS9ygp41YnHr0iiu2HbU4bO" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="MTConfigurable" />
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="b98faafb-55b7-4fe3-ad02-756fa42a9a7a" name="Changes" comment="" />
+      <created>1652298381285</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1652298381285</updated>
+    </task>
+    <servers />
+  </component>
+</project>
