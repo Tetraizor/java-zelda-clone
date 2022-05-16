@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import component.*;
 
@@ -144,21 +145,25 @@ public class GamePanel extends JPanel implements Runnable
     public void start() throws IOException {
         GameSetupManager.SetupImages(Color.red);
 
-        entityList.add(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1));
-        entityList.add(new Enemy(new Vector2(12 * originalTileSize, 5 * originalTileSize)));
-        entityList.add(new Enemy(new Vector2(13 * originalTileSize, 5 * originalTileSize)));
-        entityList.add(new Enemy(new Vector2(14 * originalTileSize, 5 * originalTileSize)));
-        entityList.add(new Enemy(new Vector2(15 * originalTileSize, 5 * originalTileSize)));
-        entityList.add(new Enemy(new Vector2(16 * originalTileSize, 5 * originalTileSize)));
-        mainCamera.SetTarget(entityList.get(0));
+        CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 5));
+        CreateObject(new Slime("Slime", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(13 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(14 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(15 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(16 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
 
+        CreateObject(new ToolEntity("Sword", new Vector2(10 * originalTileSize, 10 * originalTileSize)));
+
+        mainCamera.SetTarget(entityList.get(1));
     }
 
     public void update()
     {
         mainCamera.update();
+
         for(Entity entity : entityList)
-            entity.update();
+            if(entity.IsActive())
+                entity.update();
     }
 
     public void paintComponent(Graphics g)
@@ -169,10 +174,16 @@ public class GamePanel extends JPanel implements Runnable
 
         tileManager.draw(g2D);
 
-        for(Entity entity : entityList)
-            entity.render(g2D);
+        for(int i = entityList.size() - 1; i >= 0; i--)
+            if(entityList.get(i).IsActive())
+                entityList.get(i).render(g2D);
 
         g2D.dispose();
+    }
+
+    public Entity CreateObject(Entity object) {
+        entityList.add(object);
+        return entityList.get(entityList.size() - 1);
     }
 }
 

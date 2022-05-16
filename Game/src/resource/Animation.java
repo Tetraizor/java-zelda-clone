@@ -27,7 +27,7 @@ public class Animation
         {
             for(int i = _startFrame; i <= _endFrame; i++)
             {
-                animationFrames.add(ImageUtils.ReadImage(path + "_" + i + ".png"));
+                animationFrames.add(ImageUtils.ReadImage(path + "_" + String.format("%02d", i) + ".png"));
             }
         }
         catch (IOException e)
@@ -37,8 +37,4 @@ public class Animation
 
         frameCount = (_endFrame - _startFrame) + 1;
     }
-
-
-
-
 }

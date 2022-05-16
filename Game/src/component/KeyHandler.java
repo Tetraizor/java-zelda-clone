@@ -22,6 +22,7 @@ public class KeyHandler implements KeyListener
             if(code == key.keyCode || code == key.altKeyCode)
             {
                 key.isButtonDown = true;
+                key.pressTime++;
             }
         }
     }
@@ -36,6 +37,8 @@ public class KeyHandler implements KeyListener
             if(code == key.keyCode || code == key.altKeyCode)
             {
                 key.isButtonDown = false;
+                key.isPressed = false;
+                key.pressTime = 0;
             }
         }
     }
@@ -47,6 +50,8 @@ public class KeyHandler implements KeyListener
             add(new KeyBehaviour("Down", KeyEvent.VK_DOWN, KeyEvent.VK_S));
             add(new KeyBehaviour("Right", KeyEvent.VK_RIGHT, KeyEvent.VK_D));
             add(new KeyBehaviour("Left", KeyEvent.VK_LEFT, KeyEvent.VK_A));
+            add(new KeyBehaviour("ChangeWeapon", KeyEvent.VK_R, KeyEvent.VK_Q));
+            add(new KeyBehaviour("Hit", KeyEvent.VK_SPACE, KeyEvent.VK_F));
         }
     };
 
@@ -67,6 +72,11 @@ public class KeyHandler implements KeyListener
         }
 
         public boolean isButtonDown;
+        public boolean isButtonUp;
+
+        public int pressTime;
+
+        public boolean isPressed;
 
         public int keyCode;
         public int altKeyCode;

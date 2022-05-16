@@ -10,14 +10,28 @@ import util.Vector2;
 
 import java.awt.*;
 
-public class Entity
+public class Entity implements ObjectInterface
 {
     public String name;
     public Vector2 position;
-    public float speed;
 
-    public enum Direction
-    {
+    public boolean isRendering;
+    private boolean isActive;
+
+    public boolean IsActive() {
+        return isActive;
+    }
+
+    public void SetActive(boolean state) {
+        isActive = state;
+
+        if(state)
+            System.out.println(name + " activated.");
+        else
+            System.out.println(name + " deactivated.");
+    }
+
+    public enum Direction {
         UP(2),
         LEFT(3),
         RIGHT(1),
@@ -38,46 +52,62 @@ public class Entity
 
     public Direction entityDirection = Direction.DOWN;
 
-    KeyHandler playerKeyHandler = GamePanel.mainKeyHandler;
+    public Direction intToDirection(int i) {
+        switch (i) {
+            case 0:
+                return Direction.DOWN;
+
+            case 1:
+                return Direction.RIGHT;
+
+            case 2:
+                return Direction.UP;
+
+            case 3:
+                return Direction.LEFT;
+
+            default:
+                return Direction.LEFT;
+        }
+    }
+
     GamePanel currentGP = Main.currentGamePanel;
     AnimationManager animationManager;
     public Collider collider;
 
-    public Entity(String name, int _x, int _y)
+    public Entity(String name, Vector2 _position)
     {
-        SetEntityProperties(name, new Vector2(position.x, position.y), 1);
+        this.name = name;
+        position = _position;
+        isActive = true;
         start();
+
     }
 
     public Entity()
     {
-        SetEntityProperties("New Entity", new Vector2(0, 0), 1);
+        this("New Entity", new Vector2(32, 32));
         start();
-    }
-
-    void SetEntityProperties(String name, Vector2 _position, float _speed)
-    {
-        this.name = name;
-        position = _position;
-        speed = _speed;
     }
 
     public void start()
     {
-        System.out.println("Entity start");
         animationManager = new AnimationManager();
     }
 
     public void update()
     {
         animationManager.update();
+        collider.CheckForCollisions();
     }
 
     public void render(Graphics2D g2D)
     {
-        RenderUtils.DrawSprite(new Vector2(position.x, position.y), animationManager.currentImage, true, g2D);
-        RenderUtils.DrawRect(position, GamePanel.originalTileSize, GamePanel.originalTileSize, Color.red, g2D);
-        collider.render(g2D);
+        if(isActive) {
+            RenderUtils.DrawSprite(new Vector2(position.x, position.y), animationManager.currentImage, true, g2D);
+            // RenderUtils.DrawRect(position, GamePanel.originalTileSize, GamePanel.originalTileSize, Color.red, g2D);
+            if(collider != null) collider.render(g2D);
+        }
 
     }
 }
