@@ -33,7 +33,4 @@ public class ImageUtils {
     public static BufferedImage ReadImage(String path) throws IOException {
         return ImageIO.read(Objects.requireNonNull(ImageUtils.class.getResourceAsStream(path)));
     }
-
-
-
 }

@@ -1,9 +1,11 @@
 package entity;
 
+import main.GamePanel;
 import resource.Collision;
 import resource.MoveOrder;
 import util.Vector2;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class EntityMoving extends Entity{
@@ -12,6 +14,9 @@ public class EntityMoving extends Entity{
     public float speed;
     public int health;
     public int maxHealth;
+
+    public boolean canHurt;
+    public boolean isMovingForced;
 
     public ArrayList<MoveOrder> moveOrders;
     public MoveOrder currentMoveOrder;
@@ -22,17 +27,34 @@ public class EntityMoving extends Entity{
     {
         super(_name, _position);
         maxHealth = _maxHealth;
+        health = maxHealth;
         speed = _speed;
+        isMovingForced = false;
     }
 
     public EntityMoving() {
         super();
     }
 
-    public void update() {
+    public void CheckForHealth() {
+        if(invincibilityTime > 0) {
+
+            invincibilityTime -= 1/60.0f;
+        }else
+        {
+            canHurt = true;
+        }
+
+        if (health <= 0) {
+            KillEntity();
+        }
+    }
+
+    public void update() throws InterruptedException {
         super.update();
 
         boolean isMoving = true;
+        isMovingForced = false;
         Vector2 moveVector = new Vector2(0, 0);
 
         if(currentMoveOrder.moveAmount > 0) {
@@ -61,6 +83,8 @@ public class EntityMoving extends Entity{
 
             collider.CheckForCollisions();
 
+            isMovingForced = true;
+
             for (Collision collision : collider.collisions) {
                 if (collision.direction == entityDirection && collision.isSolid)
                     isMoving = false;
@@ -71,17 +95,17 @@ public class EntityMoving extends Entity{
         }
         else
         {
-            if(moveOrders.size() < 2) {
+            isMovingForced = false;
 
-            }
-            else
-            {
+            if(moveOrders.size() >= 2) {
                 moveOrders.remove(currentMoveOrder);
                 currentMoveOrder = moveOrders.get(0);
             }
 
             collider.CheckForCollisions();
         }
+
+        CheckForHealth();
     }
 
     public void Move(float _amount, Direction _direction, float _multiplier, boolean _override) {
@@ -103,5 +127,18 @@ public class EntityMoving extends Entity{
         super.start();
         moveOrders = new ArrayList<MoveOrder>();
         Move(16, entityDirection, 0, false);
+
+        canHurt = true;
+    }
+
+    public void GetDamage(int _damage, float _invincibilityTime, float _knockback, Direction _direction) {
+        if(canHurt) {
+            GamePanel.instance.playSound(1);
+            canHurt = false;
+            health -= _damage;
+            invincibilityTime = _invincibilityTime;
+            System.out.println(name + " got hurt from " + _direction + " damage! Current health is: " + health);
+            Move(_knockback, _direction, 10, true);
+        }
     }
 }

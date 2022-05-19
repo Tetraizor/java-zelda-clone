@@ -1,13 +1,13 @@
 package main;
 
 import javax.swing.*;
+import java.io.IOException;
 
 public class Main
 {
     public static GamePanel currentGamePanel;
 
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws IOException {
         // Create window object.
         JFrame window = new JFrame();
 

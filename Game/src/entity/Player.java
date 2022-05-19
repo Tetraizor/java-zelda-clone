@@ -16,8 +16,13 @@ public class Player extends EntityMoving implements ObjectInterface
     KeyHandler playerKeyHandler = GamePanel.mainKeyHandler;
 
     ArrayList<Tool> toolList = new ArrayList<Tool>();
-    Tool currentTool;
+    public Tool currentTool;
     PlayerTool currentToolEntity;
+
+    public boolean canInput;
+
+    public int arrowCount;
+    public int magic;
 
     boolean isToolBeingUsed;
     float toolTime;
@@ -27,13 +32,14 @@ public class Player extends EntityMoving implements ObjectInterface
     {
         super(_name, _position, _speed, _health);
 
-        toolList.add(new Tool("Sword", .4f, 4, false, 0, 0));
-        toolList.add(new Tool("Bow", .4f, 4, true, 4, 1));
+        toolList.add(new Tool("Sword", .4f, 6, 1.3f,false, 0, 0));
+        toolList.add(new Tool("Bow", .4f, 4, 0.8f, true, 4, 1));
+        toolList.add(new Tool("Fire Wand", .6f, 3, .2f, true, 8, 2));
+        toolList.add(new Tool("Stick", .6f, 4, 1f, false, 12, 3));
 
-        toolList.get(0).Enable();
-        toolList.get(1).Enable();
+        toolList.get(3).Enable();
+        currentTool = toolList.get(3);
 
-        currentTool = toolList.get(0);
         currentToolEntity = (PlayerTool) GamePanel.instance.CreateObject(new PlayerTool("PlayerTool", new Vector2(position.x, position.y), this));
 
         // Idle
@@ -54,16 +60,23 @@ public class Player extends EntityMoving implements ObjectInterface
         animationManager.CreateAnimation("/sprite/player/original/player", 10, 10, 10); // Hit Up
         animationManager.CreateAnimation("/sprite/player/original/player", 14, 14, 10); // Hit Left
 
+        // Collect item
+        animationManager.CreateAnimation("/sprite/player/original/player", 31, 1);
+
+        // Die
+        animationManager.CreateAnimation("/sprite/player/original/player", 19, 1);
+
         collider = new Collider(this, 0, 0, 16, 16, true, true);
+
+        canInput = true;
     }
 
     public void start() {
         super.start();
     }
 
-    public void update()
-    {
-        // Update Entity class as well.
+    public void update() throws InterruptedException {
+        // Update EntityMoving class as well.
         super.update();
 
         // Handle tools
@@ -83,14 +96,17 @@ public class Player extends EntityMoving implements ObjectInterface
         }
 
         // Handle inputs on separate function.
-        InputHandler();
+        if(canInput)
+            InputHandler();
 
-        if(isToolBeingUsed)
-            animationManager.SwitchAnimation((int)(entityDirection.getValue() + 8));
-        else if(!isToolBeingUsed && isMoving)
-            animationManager.SwitchAnimation((int)(entityDirection.getValue() + 4));
-        else
-            animationManager.SwitchAnimation((int)(entityDirection.getValue()));
+        if(!isMovingForced && canInput) {
+            if(isToolBeingUsed)
+                animationManager.SwitchAnimation((int)(entityDirection.getValue() + 8));
+            else if(!isToolBeingUsed && isMoving)
+                animationManager.SwitchAnimation((int)(entityDirection.getValue() + 4));
+            else
+                animationManager.SwitchAnimation((int)(entityDirection.getValue()));
+        }
     }
 
     public void render(Graphics2D g2D)
@@ -156,7 +172,7 @@ public class Player extends EntityMoving implements ObjectInterface
             if(collision.direction == entityDirection && collision.isSolid)
                 isMoving = false;
         }
-        if(isMoving && !isToolBeingUsed)
+        if(isMoving && !isToolBeingUsed && !isMovingForced)
             position.Add(moveVector);
     }
 
@@ -167,7 +183,7 @@ public class Player extends EntityMoving implements ObjectInterface
 
     public void SwingWeapon()
     {
-        if(!isToolBeingUsed) {
+        if(!isToolBeingUsed && !isMovingForced) {
             switch (entityDirection) {
                 case UP:
                     currentToolEntity.position.x = position.x;
@@ -194,6 +210,7 @@ public class Player extends EntityMoving implements ObjectInterface
                     break;
             }
 
+
             isToolBeingUsed = true;
             toolTime = currentTool.swingTime;
             currentToolEntity.SetActive(true);
@@ -206,8 +223,17 @@ public class Player extends EntityMoving implements ObjectInterface
 
         boolean gotTool = false;
 
+        int currentIndex = toolList.indexOf(currentTool);
+
         while(!gotTool) {
-            int currentIndex = toolList.indexOf(currentTool);
+            int toolCount = 0;
+
+            for(Tool tool : toolList)
+                if(tool.isEnabled)
+                    toolCount++;
+
+            if(toolCount < 2)
+                break;
 
             if(currentIndex == toolList.size() - 1)
                 currentIndex = 0;
@@ -219,7 +245,19 @@ public class Player extends EntityMoving implements ObjectInterface
             if(gotTool)
                 currentTool = toolList.get(currentIndex);
         }
+    }
 
-        System.out.println("Changed to tool " + currentTool.name);
+    public void KillEntity() {
+
+        if(!isDead) {
+            isDead = true;
+
+            System.out.println("Im dead :(");
+            GamePanel.instance.stopMusic();
+            GamePanel.instance.playSound(6);
+            Move(100, entityDirection, 1,true);
+            animationManager.SwitchAnimation(13);
+            canInput = false;
+        }
     }
 }

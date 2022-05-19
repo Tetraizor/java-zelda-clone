@@ -18,6 +18,7 @@ public class Entity implements ObjectInterface
 
     public boolean isRendering;
     private boolean isActive;
+    public boolean isDead;
 
     public boolean isCreated;
 
@@ -94,13 +95,29 @@ public class Entity implements ObjectInterface
         start();
     }
 
+    public void KillEntity(int _delay) throws InterruptedException {
+        new java.util.Timer().schedule(
+                new java.util.TimerTask() {
+                    @Override
+                    public void run() {
+                        KillEntity();
+                    }
+                },
+                _delay
+        );
+    }
+
+    public void KillEntity() {
+        if(this.IsActive())
+            this.SetActive(false);
+    }
+
     public void start()
     {
         animationManager = new AnimationManager();
     }
 
-    public void update()
-    {
+    public void update() throws InterruptedException {
         animationManager.update();
     }
 

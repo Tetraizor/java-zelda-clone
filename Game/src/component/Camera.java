@@ -39,6 +39,14 @@ public class Camera
 
         this.position = new Vector2(x, y);
 
+        if(this.position.x < GamePanel.screenWidth / (2 * GamePanel.scaleFactor))
+            this.position.x = GamePanel.screenWidth / (2 * GamePanel.scaleFactor);
+
+        if(this.position.y < GamePanel.screenHeight / (2 * GamePanel.scaleFactor) - GamePanel.screenHeight / (6 * GamePanel.scaleFactor))
+            this.position.y = GamePanel.screenHeight / (2 * GamePanel.scaleFactor) - GamePanel.screenHeight / (6 * GamePanel.scaleFactor);
+
+        if(this.position.x > 64 * GamePanel.originalTileSize - GamePanel.screenWidth / (2 * GamePanel.scaleFactor))
+            this.position.x = 64 * GamePanel.originalTileSize - GamePanel.screenWidth / (2 * GamePanel.scaleFactor);
     }
 
     public Boolean IsInsideBoundaries(Vector2 _pos, float _offset)

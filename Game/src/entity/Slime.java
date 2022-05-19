@@ -1,6 +1,7 @@
 package entity;
 
 import component.Collider;
+import resource.Collision;
 import util.Vector2;
 
 public class Slime extends Enemy implements ObjectInterface {
@@ -22,5 +23,23 @@ public class Slime extends Enemy implements ObjectInterface {
         animationManager.CreateAnimation("/sprite/slime/slime", 3, 3, 10); // Idle Left
 
         collider = new Collider(this, 0, 0, 16, 16, true, true);
+    }
+
+    public void ProcessAI() {
+        if(moveOrders.size() < 2) {
+            Move((int)(Math.random() * 32) + 32, intToDirection((int) (Math.random() * 4.5)), 1, false);
+        }
+    }
+
+    public void update() throws InterruptedException {
+        super.update();
+
+        for(Collision collision : collider.collisions) {
+            if(collision.entity instanceof Player) {
+                ((Player) collision.entity).GetDamage(1, 1.6f, 0, entityDirection);
+                System.out.println("Can hurt: " + ((Player) collision.entity).canHurt);
+            }
+        }
+
     }
 }

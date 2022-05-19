@@ -2,6 +2,7 @@ package component;
 
 import main.GamePanel;
 import resource.Tile;
+import util.ImageUtils;
 import util.RenderUtils;
 import util.Vector2;
 
@@ -13,6 +14,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import java.io.File;
+import java.nio.Buffer;
+import java.util.Objects;
+
 public class TileManager
 {
     Tile[][] map;
@@ -22,8 +28,9 @@ public class TileManager
     public int width;
     public int height;
 
-    public TileManager(int mapIndex, int _width, int _height)
-    {
+
+
+    public TileManager(int mapIndex, int _width, int _height) throws IOException {
         height = _height;
         width = _width;
 
@@ -49,7 +56,7 @@ public class TileManager
         AddTile("Blank", 11, true); // 11: Blank
         AddTile("Door", 12, true); // 12: Door
         AddTile("Wood Trunk Start", 13, true); // 13: Wood Trunk Start
-        AddTile("Cave Entrance", 14, true); // 14: Cave Entrance
+        AddTile("Cave Background", 14, false); // 14: Cave Entrance
         AddTile("Blank", 15, true); // 15: Blank
     }
 
@@ -59,10 +66,9 @@ public class TileManager
         tileList.add(new Tile(_name, _index, _isSolid));
     }
 
-    public void LoadMap(int mapIndex)
-    {
+    public void LoadMap(int mapIndex) throws IOException {
         map = new Tile[width][height];
-
+        /*
         try
         {
             InputStream is = getClass().getResourceAsStream("/map/map" + mapIndex + ".txt");
@@ -91,6 +97,39 @@ public class TileManager
         {
             e.printStackTrace();
         }
+         */
+
+        int white = Color.white.getRGB();
+        int black = Color.black.getRGB();
+        int red = new Color(190, 38, 51).getRGB();
+        int cave = new Color(66, 66, 66).getRGB();
+
+        System.out.println("White: " + white);
+        System.out.println("Black: " + black);
+        System.out.println("Red: " + red);
+        System.out.println("Cave : " + cave);
+
+        BufferedImage mapImage = ImageUtils.ReadImage("/map/map1.png");
+        for(int y = 0; y < height; y++)
+            for(int x = 0; x < width; x++)
+                switch (mapImage.getRGB(x, y)) {
+                    case -1: // White - Grass
+                        map[x][y] = tileList.get(0);
+                        break;
+                    case -16777216: // Black - Stone
+                        map[x][y] = tileList.get(10);
+                        break;
+                    case -4315597:
+                        map[x][y] = tileList.get(1);
+                        break;
+                    case -12434878:
+                        map[x][y] = tileList.get(14);
+                        break;
+                    default:
+                        map[x][y] = tileList.get(0);
+                        break;
+
+                }
     }
 
     public Tile WorldCoordinateToTile(Vector2 pos)

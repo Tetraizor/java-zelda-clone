@@ -11,37 +11,33 @@ public class PlayerTool extends EntityStationary {
 
     public float invincibilityTime;
     public int damage;
+    public float knockback;
     public Player player;
 
     public PlayerTool (String _name, Vector2 _position, Player _player) {
         super(_name, _position);
         player = _player;
+
+        animationManager.SwitchAnimation(11);
         start();
     }
 
     public void start() {
         super.start();
 
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 0,  1);
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 1,  1);
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 2,  1);
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 3,  1);
-
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 4,  1);
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 5,  1);
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 6,  1);
-        animationManager.CreateAnimation("/sprite/tool/tool_tool", 7,  1);
+        for(int i = 0; i < 16; i++)
+            animationManager.CreateAnimation("/sprite/tool/tool_tool", i,  1);
 
         collider = new Collider(this, 0, 0, 16, 16, false, false);
     }
 
-    public void update() {
+    public void update() throws InterruptedException {
         super.update();
 
         for(Collision collision : collider.collisions)
         {
             if(collision.entity instanceof Enemy) {
-                ((Enemy) (collision.entity)).GetDamage(damage, invincibilityTime + .2f, player.entityDirection);
+                ((Enemy) (collision.entity)).GetDamage(damage, invincibilityTime + .2f, knockback, player.entityDirection);
                 System.out.println(player.entityDirection);
             }
         }
@@ -50,10 +46,26 @@ public class PlayerTool extends EntityStationary {
     public void Hurt(Tool _tool) {
         invincibilityTime = _tool.swingTime;
         damage = _tool.damage;
+        knockback = _tool.knockback;
+
+        switch (_tool.index) {
+            case 0: // Sword
+                GamePanel.instance.playSound(3);
+                break;
+            case 1: // Bow
+                GamePanel.instance.playSound(9);
+                break;
+            case 2: // Fire rod
+                GamePanel.instance.playSound(2);
+                break;
+            case 3: // Stick
+                GamePanel.instance.playSound(3);
+                break;
+        }
 
         if(_tool.isProjectileBased) {
             System.out.println("Direction: " + player.entityDirection);
-            GamePanel.instance.CreateObject(new Projectile("Arrow", new Vector2(position.x, position.y), player.entityDirection));
+            GamePanel.instance.CreateObject(new Projectile("Arrow", new Vector2(position.x, position.y), damage, invincibilityTime, knockback, player.entityDirection));
         }
     }
 }

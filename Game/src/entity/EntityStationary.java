@@ -13,7 +13,7 @@ public class EntityStationary extends Entity {
 
     }
 
-    public void update() {
+    public void update() throws InterruptedException {
         super.update();
 
         collider.CheckForCollisions();

@@ -1,5 +1,6 @@
 package main;
 
+import javax.sound.sampled.FloatControl;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -9,7 +10,9 @@ import java.util.Collections;
 import component.*;
 
 import entity.*;
+import resource.Sound;
 import resource.Tile;
+import ui.UI;
 import util.GameSetupManager;
 import util.ImageUtils;
 import util.Vector2;
@@ -29,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable
     public final static int screenHeight = row * tileSize;
     public final static int screenWidth = column * tileSize;
 
+    public static float volume = 1;
+
     public static GamePanel instance;
 
     public int mapIndex;
@@ -41,11 +46,15 @@ public class GamePanel extends JPanel implements Runnable
     public ArrayList<Entity> entityList = new ArrayList<Entity>();
     public ArrayList<Entity> objectCreatorList = new ArrayList<Entity>();
     public static KeyHandler mainKeyHandler = new KeyHandler();
-    public TileManager tileManager = new TileManager(mapIndex, column, row);
+    public TileManager tileManager = new TileManager(mapIndex, 64, 64);
     public Camera mainCamera = new Camera(16, 16);
+    public UI ui;
+    public static Player player;
 
-    public GamePanel(int mapIndex)
-    {
+    public static Sound sound = new Sound();
+    public static Sound music = new Sound();
+
+    public GamePanel(int mapIndex) throws IOException {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.addKeyListener(mainKeyHandler);
@@ -79,6 +88,8 @@ public class GamePanel extends JPanel implements Runnable
         int frames = 0;
         int fps = 0;
 
+
+
         // Start Function
         try {
             start();
@@ -104,7 +115,11 @@ public class GamePanel extends JPanel implements Runnable
                 render = true;
 
                 // TODO: Update game
-                update();
+                try {
+                    update();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
                 if(frameTime >= 1.0)
                 {
@@ -146,18 +161,28 @@ public class GamePanel extends JPanel implements Runnable
     public void start() throws IOException {
         GameSetupManager.SetupImages(Color.red);
 
-        CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 5));
+        player = (Player)CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 1));
         CreateObject(new Slime("SlimeTest", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(13 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(14 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(15 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(16 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
 
-        CreateObject(new ToolEntity("Sword", new Vector2(10 * originalTileSize, 10 * originalTileSize)));
+        CreateObject(new ToolEntity("Sword", new Vector2(10 * originalTileSize, 10 * originalTileSize), 0));
+        CreateObject(new ToolEntity("Bow", new Vector2(12 * originalTileSize, 10 * originalTileSize), 1));
+        CreateObject(new ToolEntity("Fire Rod", new Vector2(14 * originalTileSize, 10 * originalTileSize), 2));
 
         UpdateCreatedObjects();
 
         mainCamera.SetTarget(entityList.get(1));
+
+        // UI
+        ui = new UI(this);
+
+        // Audio Manager
+        setVolume(-30);
+        playMusic(0);
+
     }
 
     public void UpdateCreatedObjects() {
@@ -170,8 +195,7 @@ public class GamePanel extends JPanel implements Runnable
         }
     }
 
-    public void update()
-    {
+    public void update() throws InterruptedException {
         mainCamera.update();
 
         UpdateCreatedObjects();
@@ -181,6 +205,8 @@ public class GamePanel extends JPanel implements Runnable
                 entity.update();
             }
 
+
+        ui.update();
     }
 
     public void paintComponent(Graphics g)
@@ -195,12 +221,40 @@ public class GamePanel extends JPanel implements Runnable
             if(entityList.get(i).IsActive())
                 entityList.get(i).render(g2D);
 
+        if(ui != null)
+            ui.draw(g2D);
+
         g2D.dispose();
+    }
+
+    public void playMusic(int i) {
+
+        music.setFile(i, volume);
+        music.play();
+        music.loop();
+
+    }
+
+    public void stopMusic() {
+        music.stop();
+    }
+
+    public void playSound(int i) {
+        sound.setFile(i, volume);
+        sound.play();
     }
 
     public Entity CreateObject(Entity object) {
         objectCreatorList.add(object);
         return objectCreatorList.get(objectCreatorList.size() - 1);
+    }
+
+    public void setVolume(float _volume) {
+        volume = _volume;
+    }
+
+    public void pauseMusic(int _delay) {
+        music.pauseMusic(_delay);
     }
 }
 

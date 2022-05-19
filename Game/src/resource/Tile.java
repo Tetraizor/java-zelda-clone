@@ -1,6 +1,7 @@
 package resource;
 
 import main.Main;
+import util.ImageUtils;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -21,14 +22,14 @@ public class Tile
         {
             System.out.print(_index);
             // image = ImageIO.read(getClass().getResourceAsStream("sprite/environment/tile_" + _index + ".png"));
-            image = ImageIO.read(Main.class.getResourceAsStream("/sprite/environment/tile_" + _index + ".png"));
+            image = ImageUtils.ReadImage("/sprite/environment/tile_" + String.format("%02d", _index) + ".png");
         }
         catch (IOException e)
         {
             System.out.println("Tile not found. Creating grass tile instead.");
             try
             {
-                image = ImageIO.read(getClass().getResourceAsStream("/sprite/environment/tile_" + 0 + ".png"));
+                image = ImageUtils.ReadImage("/sprite/environment/tile_00.png");
             }
             catch (IOException ex)
             {

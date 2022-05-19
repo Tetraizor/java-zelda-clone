@@ -1,0 +1,47 @@
+package ui;
+
+import main.GamePanel;
+import util.ImageUtils;
+import util.RenderUtils;
+
+import java.awt.*;
+
+public class UI
+{
+    GamePanel gp;
+    Font pixelArtFont;
+
+    public int health;
+    public String name;
+    public int arrowCount;
+    public int magic;
+
+
+    public UI(GamePanel gp) {
+        this.gp = gp;
+        pixelArtFont = new Font("PixelArtFont", Font.PLAIN, 48);
+    }
+
+    public void draw(Graphics2D g2) {
+        g2.setFont(pixelArtFont);
+        g2.setColor(Color.black);
+        g2.fillRect(0, 0, GamePanel.screenWidth, GamePanel.screenHeight / 5);
+        g2.setColor(Color.white);
+
+        g2.drawString("Umuthan", 32, 48);
+        g2.drawString("Health: " + health, 32, 48 + 48);
+        g2.drawString("Tool: " + GamePanel.player.currentTool.name, 200, 48);
+
+        if(GamePanel.player.isDead) {
+            g2.setColor(Color.black);
+            g2.fillRect(0, 0, GamePanel.screenWidth, GamePanel.screenHeight);
+            GamePanel.player.render(g2);
+        }
+    }
+
+    public void update() {
+        health = GamePanel.player.health;
+    }
+
+
+}
