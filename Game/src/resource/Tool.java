@@ -6,6 +6,7 @@ public class Tool extends Entity {
 
     public float swingTime;
     public int damage;
+    public int index;
 
     public String name;
 
@@ -15,12 +16,13 @@ public class Tool extends Entity {
 
     public boolean isEnabled;
 
-    public Tool(String _name, float _swingTime, int _damage, boolean _isProjectileBased, int _imageIndex) {
+    public Tool(String _name, float _swingTime, int _damage, boolean _isProjectileBased, int _imageIndex, int _index) {
         name = _name;
         swingTime = _swingTime;
         damage = _damage;
         isProjectileBased = _isProjectileBased;
         imageIndex = _imageIndex;
+        index = _index;
     }
 
     public void Enable() {

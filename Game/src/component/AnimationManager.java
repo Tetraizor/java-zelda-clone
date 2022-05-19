@@ -27,6 +27,11 @@ public class AnimationManager
         animations.add(new Animation(_name, _startFrame, _endFrame, _speed));
     }
 
+    public void CreateAnimation(String _name, int _frame, int _speed)
+    {
+        CreateAnimation(_name, _frame, _frame, _speed);
+    }
+
     public void SwitchAnimation(int _index)
     {
         if(animations.get(_index) == null)

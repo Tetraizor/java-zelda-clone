@@ -5,6 +5,7 @@ import component.Collider;
 import component.KeyHandler;
 import main.GamePanel;
 import main.Main;
+import resource.Collision;
 import util.RenderUtils;
 import util.Vector2;
 
@@ -17,6 +18,8 @@ public class Entity implements ObjectInterface
 
     public boolean isRendering;
     private boolean isActive;
+
+    public boolean isCreated;
 
     public boolean IsActive() {
         return isActive;
@@ -63,10 +66,7 @@ public class Entity implements ObjectInterface
             case 2:
                 return Direction.UP;
 
-            case 3:
-                return Direction.LEFT;
-
-            default:
+            default: // LEFT
                 return Direction.LEFT;
         }
     }
@@ -77,10 +77,14 @@ public class Entity implements ObjectInterface
 
     public Entity(String name, Vector2 _position)
     {
+        start();
+
+        entityDirection = Direction.DOWN;
+
         this.name = name;
         position = _position;
         isActive = true;
-        start();
+
 
     }
 
@@ -98,7 +102,6 @@ public class Entity implements ObjectInterface
     public void update()
     {
         animationManager.update();
-        collider.CheckForCollisions();
     }
 
     public void render(Graphics2D g2D)

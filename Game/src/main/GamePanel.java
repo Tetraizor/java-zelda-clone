@@ -39,6 +39,7 @@ public class GamePanel extends JPanel implements Runnable
 
     // *------ Debug ------*
     public ArrayList<Entity> entityList = new ArrayList<Entity>();
+    public ArrayList<Entity> objectCreatorList = new ArrayList<Entity>();
     public static KeyHandler mainKeyHandler = new KeyHandler();
     public TileManager tileManager = new TileManager(mapIndex, column, row);
     public Camera mainCamera = new Camera(16, 16);
@@ -111,7 +112,7 @@ public class GamePanel extends JPanel implements Runnable
                     fps = frames;
                     frames = 0;
 
-                    System.out.println("FPS: " + fps);
+                    // System.out.println("FPS: " + fps);
                 }
             }
 
@@ -146,7 +147,7 @@ public class GamePanel extends JPanel implements Runnable
         GameSetupManager.SetupImages(Color.red);
 
         CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 5));
-        CreateObject(new Slime("Slime", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("SlimeTest", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(13 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(14 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(15 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
@@ -154,16 +155,32 @@ public class GamePanel extends JPanel implements Runnable
 
         CreateObject(new ToolEntity("Sword", new Vector2(10 * originalTileSize, 10 * originalTileSize)));
 
+        UpdateCreatedObjects();
+
         mainCamera.SetTarget(entityList.get(1));
+    }
+
+    public void UpdateCreatedObjects() {
+        for(Entity entity : objectCreatorList) {
+            if(!entity.isCreated) {
+                entity.isCreated = true;
+                entityList.add(entity);
+            }
+
+        }
     }
 
     public void update()
     {
         mainCamera.update();
 
+        UpdateCreatedObjects();
+
         for(Entity entity : entityList)
-            if(entity.IsActive())
+            if(entity.IsActive()) {
                 entity.update();
+            }
+
     }
 
     public void paintComponent(Graphics g)
@@ -182,8 +199,8 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     public Entity CreateObject(Entity object) {
-        entityList.add(object);
-        return entityList.get(entityList.size() - 1);
+        objectCreatorList.add(object);
+        return objectCreatorList.get(objectCreatorList.size() - 1);
     }
 }
 

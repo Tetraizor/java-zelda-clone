@@ -27,14 +27,14 @@ public class Player extends EntityMoving implements ObjectInterface
     {
         super(_name, _position, _speed, _health);
 
-        toolList.add(new Tool("Sword", .4f, 4, false, 0));
-        toolList.add(new Tool("Bow", .4f, 4, true, 0));
+        toolList.add(new Tool("Sword", .4f, 4, false, 0, 0));
+        toolList.add(new Tool("Bow", .4f, 4, true, 4, 1));
 
         toolList.get(0).Enable();
         toolList.get(1).Enable();
 
         currentTool = toolList.get(0);
-        currentToolEntity = (PlayerTool) GamePanel.instance.CreateObject(new PlayerTool("Tool", new Vector2(position.x, position.y), this));
+        currentToolEntity = (PlayerTool) GamePanel.instance.CreateObject(new PlayerTool("PlayerTool", new Vector2(position.x, position.y), this));
 
         // Idle
         animationManager.CreateAnimation("/sprite/player/original/player", 1, 1, 10); // Idle Down
@@ -172,25 +172,25 @@ public class Player extends EntityMoving implements ObjectInterface
                 case UP:
                     currentToolEntity.position.x = position.x;
                     currentToolEntity.position.y = position.y - 15;
-                    currentToolEntity.animationManager.SwitchAnimation(1);
+                    currentToolEntity.animationManager.SwitchAnimation(1 + 4 * currentTool.index);
                     break;
 
                 case DOWN:
                     currentToolEntity.position.x = position.x;
                     currentToolEntity.position.y = position.y + 15;
-                    currentToolEntity.animationManager.SwitchAnimation(0);
+                    currentToolEntity.animationManager.SwitchAnimation(0 + 4 * currentTool.index);
                     break;
 
                 case LEFT:
                     currentToolEntity.position.x = position.x - 10;
                     currentToolEntity.position.y = position.y + 1;
-                    currentToolEntity.animationManager.SwitchAnimation(3);
+                    currentToolEntity.animationManager.SwitchAnimation(3 + 4 * currentTool.index);
                     break;
 
                 case RIGHT:
                     currentToolEntity.position.x = position.x + 10;
                     currentToolEntity.position.y = position.y + 1;
-                    currentToolEntity.animationManager.SwitchAnimation(2);
+                    currentToolEntity.animationManager.SwitchAnimation(2 + 4 * currentTool.index);
                     break;
             }
 
@@ -198,7 +198,7 @@ public class Player extends EntityMoving implements ObjectInterface
             toolTime = currentTool.swingTime;
             currentToolEntity.SetActive(true);
 
-            currentToolEntity.Hurt(currentTool.damage, currentTool.swingTime);
+            currentToolEntity.Hurt(currentTool);
         }
     }
 

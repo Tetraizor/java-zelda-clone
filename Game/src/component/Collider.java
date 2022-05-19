@@ -19,6 +19,7 @@ public class Collider
     int sizeX = 0, sizeY = 0;
 
     Vector2[] posCheck = {new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0), new Vector2(0, 0)};
+    public ArrayList<String> mask;
 
     boolean isSolid;
     boolean isDirectional;
@@ -36,6 +37,8 @@ public class Collider
         sizeY = _sizeY;
         isSolid = _isSolid;
         isDirectional = _isDirectional;
+
+        mask = new ArrayList<String>();
     }
 
     public Boolean IsColliding()
@@ -100,6 +103,23 @@ public class Collider
             posCheck[2] = new Vector2(parent.position.x + xOffset, parent.position.y + yOffset + sizeY);
             posCheck[3] = new Vector2(parent.position.x + xOffset + sizeX, parent.position.y + yOffset + sizeY);
 
+            Tile tile1 = GamePanel.instance.tileManager.WorldCoordinateToTile(posCheck[0]);
+            Tile tile2 = GamePanel.instance.tileManager.WorldCoordinateToTile(posCheck[1]);
+            Tile tile3 = GamePanel.instance.tileManager.WorldCoordinateToTile(posCheck[2]);
+            Tile tile4 = GamePanel.instance.tileManager.WorldCoordinateToTile(posCheck[3]);
+
+            if(tile1.solid)
+                AddCollision(posCheck[0], parent.entityDirection, tile1, tile1.solid);
+
+            if(tile2.solid)
+                AddCollision(posCheck[1], parent.entityDirection, tile2, tile2.solid);
+
+            if(tile1.solid)
+                AddCollision(posCheck[2], parent.entityDirection, tile3, tile3.solid);
+
+            if(tile2.solid)
+                AddCollision(posCheck[3], parent.entityDirection, tile4, tile4.solid);
+
             for(Entity entity : GamePanel.instance.entityList) {
                 if(entity.IsActive()){
                     if(entity != this.parent) {
@@ -139,19 +159,30 @@ public class Collider
     // Add collision - ENTITY
     public boolean AddCollision(Vector2 _position, EntityMoving.Direction _direction, Entity _entity, boolean _isSolid)
     {
-        if(collisions.size() != 0) {
-            for(Collision collision : collisions)
-                if(collision.collisionType == Collision.CollisionType.ENTITY)
-                    if(collision.entity != _entity) {
-                        collisions.add(new Collision(_position, _direction, _entity, _isSolid));
-                        return true;
+        boolean isMasked = false;
+
+        for (String maskName : mask)
+            if(_entity.name.equalsIgnoreCase(maskName))
+                isMasked = true;
+
+        if(!isMasked)
+            if(collisions.size() != 0)
+            {
+                for(Collision collision : collisions)
+                    if(collision.collisionType == Collision.CollisionType.ENTITY)
+                    {
+                        if(collision.entity != _entity) {
+                            collisions.add(new Collision(_position, _direction, _entity, _isSolid));
+                            return true;
+                        }
                     }
-        }
-        else
-        {
-            collisions.add(new Collision(_position, _direction, _entity, _isSolid));
-            return true;
-        }
+            }
+            else
+            {
+                collisions.add(new Collision(_position, _direction, _entity, _isSolid));
+                return true;
+            }
+
         return false;
     }
 
