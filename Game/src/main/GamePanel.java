@@ -161,8 +161,8 @@ public class GamePanel extends JPanel implements Runnable
     public void start() throws IOException {
         GameSetupManager.SetupImages(Color.red);
 
-        player = (Player)CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 1));
-        CreateObject(new Slime("SlimeTest", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        player = (Player)CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 6));
+        CreateObject(new Slime("Slime", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(13 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(14 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(15 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));

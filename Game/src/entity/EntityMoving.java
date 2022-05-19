@@ -46,7 +46,7 @@ public class EntityMoving extends Entity{
         }
 
         if (health <= 0) {
-            KillEntity();
+            this.KillEntity();
         }
     }
 
@@ -129,6 +129,17 @@ public class EntityMoving extends Entity{
         Move(16, entityDirection, 0, false);
 
         canHurt = true;
+    }
+
+
+
+    public void KillEntity() {
+        super.KillEntity();
+
+        if(name.equalsIgnoreCase("Slime")) {
+            GamePanel.instance.CreateObject(new Decor("SlimeCorpse", new Vector2(position.x, position.y), 0));
+            System.out.println("AAA");
+        }
     }
 
     public void GetDamage(int _damage, float _invincibilityTime, float _knockback, Direction _direction) {

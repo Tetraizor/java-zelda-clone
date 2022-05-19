@@ -54,18 +54,15 @@ public class PlayerTool extends EntityStationary {
                 break;
             case 1: // Bow
                 GamePanel.instance.playSound(9);
+                GamePanel.instance.CreateObject(new Projectile("Arrow", 0, new Vector2(position.x, position.y), damage, invincibilityTime, knockback, player.entityDirection));
                 break;
             case 2: // Fire rod
                 GamePanel.instance.playSound(2);
+                GamePanel.instance.CreateObject(new Projectile("Fire", 1, new Vector2(position.x, position.y), damage, invincibilityTime, knockback, player.entityDirection));
                 break;
             case 3: // Stick
                 GamePanel.instance.playSound(3);
                 break;
-        }
-
-        if(_tool.isProjectileBased) {
-            System.out.println("Direction: " + player.entityDirection);
-            GamePanel.instance.CreateObject(new Projectile("Arrow", new Vector2(position.x, position.y), damage, invincibilityTime, knockback, player.entityDirection));
         }
     }
 }

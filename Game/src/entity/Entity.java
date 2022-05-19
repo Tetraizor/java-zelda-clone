@@ -108,8 +108,10 @@ public class Entity implements ObjectInterface
     }
 
     public void KillEntity() {
-        if(this.IsActive())
+        if(this.IsActive()) {
             this.SetActive(false);
+        }
+
     }
 
     public void start()
