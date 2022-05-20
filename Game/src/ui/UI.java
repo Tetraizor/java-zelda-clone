@@ -25,7 +25,7 @@ public class UI
     public void draw(Graphics2D g2) {
         g2.setFont(pixelArtFont);
         g2.setColor(Color.black);
-        g2.fillRect(0, 0, GamePanel.screenWidth, GamePanel.screenHeight / 5);
+        g2.fillRect(0, 0, GamePanel.screenWidth, GamePanel.originalTileSize * 4 * GamePanel.scaleFactor);
         g2.setColor(Color.white);
 
         g2.drawString("Umuthan", 32, 48);

@@ -32,10 +32,11 @@ public class Player extends EntityMoving implements ObjectInterface
     {
         super(_name, _position, _speed, _health);
 
-        toolList.add(new Tool("Sword", .4f, 6, 1.3f,false, 0, 0));
+        toolList.add(new Tool("Sword", .3f, 6, 1.3f,false, 0, 0));
         toolList.add(new Tool("Bow", .4f, 4, 0.8f, true, 4, 1));
-        toolList.add(new Tool("Fire Wand", .6f, 3, .2f, true, 8, 2));
+        toolList.add(new Tool("Fire Wand", 1, 3, .2f, true, 8, 2));
         toolList.add(new Tool("Stick", .6f, 4, 1f, false, 12, 3));
+        toolList.add(new Tool("Ice Wand", 1, 2, .2f, true, 16, 4));
 
         toolList.get(3).Enable();
         currentTool = toolList.get(3);

@@ -7,46 +7,59 @@ import util.Vector2;
 public class Camera
 {
     public Vector2 position = new Vector2(0, 0);
-    public Entity target;
+    public Vector2 targetChunk;
+    public Vector2 targetPosition;
+    public float speed = 8;
 
     public Camera(int xPosition, int yPosition)
     {
-        SetPosition(xPosition, yPosition);
-    }
+        targetChunk = new Vector2(1, 1);
+        targetPosition = new Vector2(0, 0);
+        SetTargetChunk((int)targetChunk.x, (int)targetChunk.y);
+        SetPosition();
 
-    public Camera(int xPosition, int yPosition, Entity target)
-    {
-        SetPosition(xPosition, yPosition);
-        this.target = target;
     }
 
     public void update()
     {
-        if(target == null)
+        if(targetChunk == null)
             return;
 
-        SetPosition(target.position.x, target.position.y);
+        SetPosition();
     }
 
-    public void SetTarget(Entity _target)
+    public void SetTargetChunk(int x, int y)
     {
-        target = _target;
+        targetChunk.x = x;
+        targetChunk.y = y;
     }
 
-    public void SetPosition(float x, float y)
+    public void SetPosition()
     {
-        // Clamp position
+        this.targetPosition = new Vector2( (targetChunk.x + .5f) * GamePanel.column * GamePanel.originalTileSize,
+                                     ((targetChunk.y * GamePanel.row) + (5) ) * GamePanel.originalTileSize);
 
-        this.position = new Vector2(x, y);
 
-        if(this.position.x < GamePanel.screenWidth / (2 * GamePanel.scaleFactor))
-            this.position.x = GamePanel.screenWidth / (2 * GamePanel.scaleFactor);
+        if(position.x < targetPosition.x - 10) {
+            position.x += speed;
+        } else if(position.x > targetPosition.x + 10) {
+            position.x -= speed;
+        }
+        else {
+            position.x = targetPosition.x;
+        }
 
-        if(this.position.y < GamePanel.screenHeight / (2 * GamePanel.scaleFactor) - GamePanel.screenHeight / (6 * GamePanel.scaleFactor))
-            this.position.y = GamePanel.screenHeight / (2 * GamePanel.scaleFactor) - GamePanel.screenHeight / (6 * GamePanel.scaleFactor);
+        if(position.y < targetPosition.y - 10) {
+            position.y += speed;
+        } else if(position.y > targetPosition.y + 10) {
+            position.y -= speed;
+        }
+        else {
+            position.y = targetPosition.y;
+        }
 
-        if(this.position.x > 64 * GamePanel.originalTileSize - GamePanel.screenWidth / (2 * GamePanel.scaleFactor))
-            this.position.x = 64 * GamePanel.originalTileSize - GamePanel.screenWidth / (2 * GamePanel.scaleFactor);
+
+
     }
 
     public Boolean IsInsideBoundaries(Vector2 _pos, float _offset)

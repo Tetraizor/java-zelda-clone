@@ -16,6 +16,9 @@ public class Entity implements ObjectInterface
     public String name;
     public Vector2 position;
 
+    public int activeChunkX;
+    public int activeChunkY;
+
     public boolean isRendering;
     private boolean isActive;
     public boolean isDead;
@@ -89,6 +92,17 @@ public class Entity implements ObjectInterface
 
     }
 
+    public void CalculateActiveChunk() {
+        activeChunkX = (int)(position.x / (GamePanel.column * GamePanel.originalTileSize));
+        activeChunkY = (int)(position.y / (GamePanel.row * GamePanel.originalTileSize));
+    }
+
+    public boolean IsInActiveChunk() {
+        CalculateActiveChunk();
+
+        return (activeChunkX == GamePanel.instance.activeChunkX && activeChunkY == GamePanel.instance.activeChunkY);
+    }
+
     public Entity()
     {
         this("New Entity", new Vector2(32, 32));
@@ -111,7 +125,6 @@ public class Entity implements ObjectInterface
         if(this.IsActive()) {
             this.SetActive(false);
         }
-
     }
 
     public void start()

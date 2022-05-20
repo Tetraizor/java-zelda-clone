@@ -26,10 +26,10 @@ public class GamePanel extends JPanel implements Runnable
 
     public final static int tileSize = originalTileSize * scaleFactor;
 
-    public final static int column = 24;
+    public final static int column = 22;
     public final static int row = 14;
 
-    public final static int screenHeight = row * tileSize;
+    public final static int screenHeight = (row + 4) * tileSize;
     public final static int screenWidth = column * tileSize;
 
     public static float volume = 1;
@@ -37,6 +37,8 @@ public class GamePanel extends JPanel implements Runnable
     public static GamePanel instance;
 
     public int mapIndex;
+    public int activeChunkX;
+    public int activeChunkY;
 
     // *------ Threading ------*
     Thread gameThread;
@@ -46,8 +48,8 @@ public class GamePanel extends JPanel implements Runnable
     public ArrayList<Entity> entityList = new ArrayList<Entity>();
     public ArrayList<Entity> objectCreatorList = new ArrayList<Entity>();
     public static KeyHandler mainKeyHandler = new KeyHandler();
-    public TileManager tileManager = new TileManager(mapIndex, 64, 64);
-    public Camera mainCamera = new Camera(16, 16);
+    public TileManager tileManager = new TileManager(mapIndex, 176, 104);
+    public Camera mainCamera = new Camera(0, 0);
     public UI ui;
     public static Player player;
 
@@ -171,10 +173,11 @@ public class GamePanel extends JPanel implements Runnable
         CreateObject(new ToolEntity("Sword", new Vector2(10 * originalTileSize, 10 * originalTileSize), 0));
         CreateObject(new ToolEntity("Bow", new Vector2(12 * originalTileSize, 10 * originalTileSize), 1));
         CreateObject(new ToolEntity("Fire Rod", new Vector2(14 * originalTileSize, 10 * originalTileSize), 2));
+        CreateObject(new ToolEntity("Ice Rod", new Vector2(16 * originalTileSize, 10 * originalTileSize), 4));
 
         UpdateCreatedObjects();
 
-        mainCamera.SetTarget(entityList.get(1));
+        mainCamera.SetTargetChunk(0, 0);
 
         // UI
         ui = new UI(this);
@@ -196,15 +199,21 @@ public class GamePanel extends JPanel implements Runnable
     }
 
     public void update() throws InterruptedException {
-        mainCamera.update();
 
         UpdateCreatedObjects();
+        player.CalculateActiveChunk();
+        activeChunkX = player.activeChunkX;
+        activeChunkY = player.activeChunkY;
 
         for(Entity entity : entityList)
             if(entity.IsActive()) {
-                entity.update();
+                if(entity.IsInActiveChunk())
+                    entity.update();
             }
 
+        mainCamera.SetTargetChunk(activeChunkX, activeChunkY);
+
+        mainCamera.update();
 
         ui.update();
     }

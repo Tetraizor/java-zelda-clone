@@ -11,8 +11,9 @@ public class RenderUtils
     public static void DrawSprite(Vector2 pos, BufferedImage image, Boolean checkIfOnBoundary, Graphics2D g2D)
     {
         if(checkIfOnBoundary)
-            if(!GamePanel.instance.mainCamera.IsInsideBoundaries(pos, GamePanel.originalTileSize))
+            if(!GamePanel.instance.mainCamera.IsInsideBoundaries(pos, GamePanel.originalTileSize)) {
                 return;
+            }
 
         g2D.drawImage(image, (int)((pos.x - GamePanel.instance.mainCamera.position.x) * GamePanel.scaleFactor  + GamePanel.screenWidth / 2), (int)((pos.y - GamePanel.instance.mainCamera.position.y) * GamePanel.scaleFactor + GamePanel.screenHeight / 2), GamePanel.tileSize, GamePanel.tileSize, null);
     }

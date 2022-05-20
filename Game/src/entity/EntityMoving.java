@@ -15,11 +15,24 @@ public class EntityMoving extends Entity{
     public int health;
     public int maxHealth;
 
+    public float originalSpeed;
+
     public boolean canHurt;
     public boolean isMovingForced;
 
+    public boolean isOnFire;
+    public boolean isFrozen;
+
+    public float fireTimer;
+    public float iceTimer;
+
+    public float fireCooldown;
+
     public ArrayList<MoveOrder> moveOrders;
     public MoveOrder currentMoveOrder;
+
+    public Decor fireEffect;
+    public Decor iceEffect;
 
     public float invincibilityTime = 0;
 
@@ -28,12 +41,56 @@ public class EntityMoving extends Entity{
         super(_name, _position);
         maxHealth = _maxHealth;
         health = maxHealth;
-        speed = _speed;
         isMovingForced = false;
+
+        originalSpeed = _speed;
+        speed = originalSpeed;
+
+        fireEffect = (Decor)GamePanel.instance.CreateObject(new Decor("FireEffect", position, 1,true));
+        iceEffect = (Decor)GamePanel.instance.CreateObject(new Decor("IceEffect", position, 2, true));
+
+        fireEffect.SetActive(false);
+        iceEffect.SetActive(false);
     }
 
     public EntityMoving() {
         super();
+    }
+
+    public void SetOnFire(float _time) {
+        if(!isOnFire && !isFrozen) {
+            isOnFire = true;
+            speed = originalSpeed * 1.4f;
+            fireEffect.SetActive(true);
+            fireTimer = _time;
+            fireCooldown = 0;
+        }
+    }
+
+    public void ExtinguishFire() {
+        if(isOnFire) {
+            isOnFire = false;
+            speed = originalSpeed;
+            fireEffect.SetActive(false);
+            fireCooldown = 0;
+        }
+    }
+
+    public void Freeze(float _time) {
+        if(!isOnFire && !isFrozen) {
+            isFrozen = true;
+            speed = 0;
+            iceEffect.SetActive(true);
+            iceTimer = _time;
+        }
+    }
+
+    public void RemoveIce() {
+        if(isFrozen) {
+            isFrozen = false;
+            speed = originalSpeed;
+            iceEffect.SetActive(false);
+        }
     }
 
     public void CheckForHealth() {
@@ -105,6 +162,30 @@ public class EntityMoving extends Entity{
             collider.CheckForCollisions();
         }
 
+        if(fireTimer > 0) {
+            fireTimer -= 1/60.0f;
+            if(fireCooldown > 0) {
+                fireCooldown -= 1/60.0f;
+            }
+            else
+            {
+                GetDamage(1, 0.2f, 0, entityDirection);
+                fireCooldown = 1;
+            }
+        }else
+        {
+            if(isOnFire)
+                ExtinguishFire();
+        }
+
+        if(iceTimer > 0) {
+            iceTimer -= 1/60.0f;
+        }else
+        {
+            if(isFrozen)
+                RemoveIce();
+        }
+
         CheckForHealth();
     }
 
@@ -131,14 +212,11 @@ public class EntityMoving extends Entity{
         canHurt = true;
     }
 
-
-
     public void KillEntity() {
         super.KillEntity();
 
         if(name.equalsIgnoreCase("Slime")) {
-            GamePanel.instance.CreateObject(new Decor("SlimeCorpse", new Vector2(position.x, position.y), 0));
-            System.out.println("AAA");
+            GamePanel.instance.CreateObject(new Decor("SlimeCorpse", new Vector2(position.x, position.y), 0, false));
         }
     }
 
