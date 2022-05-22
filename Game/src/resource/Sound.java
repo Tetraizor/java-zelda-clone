@@ -33,8 +33,6 @@ public class Sound {
 
             FloatControl audioController = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
             audioController.setValue(_volume);
-
-
         }
         catch (Exception e) {
             e.printStackTrace();

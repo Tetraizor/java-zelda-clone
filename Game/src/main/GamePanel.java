@@ -165,15 +165,29 @@ public class GamePanel extends JPanel implements Runnable
 
         player = (Player)CreateObject(new Player("Player", new Vector2(12 * originalTileSize, 7 * originalTileSize), 1, 6));
         CreateObject(new Slime("Slime", new Vector2(12 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
-        CreateObject(new Slime("Slime", new Vector2(13 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(14 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
-        CreateObject(new Slime("Slime", new Vector2(15 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
         CreateObject(new Slime("Slime", new Vector2(16 * originalTileSize, 5 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(30 * originalTileSize, 35 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(35 * originalTileSize, 35 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(35 * originalTileSize, 39 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(30 * originalTileSize, 39 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(29 * originalTileSize, 17 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(36 * originalTileSize, 17 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(36 * originalTileSize, 25 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(29 * originalTileSize, 25 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(49 * originalTileSize, 18 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(49 * originalTileSize, 23 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(29 * originalTileSize, 10 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(36 * originalTileSize, 10 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(47 * originalTileSize, 7 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(9 * originalTileSize, 32 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(11 * originalTileSize, 34 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
+        CreateObject(new Slime("Slime", new Vector2(13 * originalTileSize, 36 * originalTileSize), (float)(Math.random() * .3 + .2), 1));
 
-        CreateObject(new ToolEntity("Sword", new Vector2(10 * originalTileSize, 10 * originalTileSize), 0));
-        CreateObject(new ToolEntity("Bow", new Vector2(12 * originalTileSize, 10 * originalTileSize), 1));
-        CreateObject(new ToolEntity("Fire Rod", new Vector2(14 * originalTileSize, 10 * originalTileSize), 2));
-        CreateObject(new ToolEntity("Ice Rod", new Vector2(16 * originalTileSize, 10 * originalTileSize), 4));
+        CreateObject(new ToolEntity("Sword", new Vector2(5 * originalTileSize, 8 * originalTileSize), 0));
+        CreateObject(new ToolEntity("Bow", new Vector2(60 * originalTileSize, 3 * originalTileSize), 1));
+        CreateObject(new ToolEntity("Fire Rod", new Vector2(62 * originalTileSize, 21 * originalTileSize), 2));
+        CreateObject(new ToolEntity("Ice Rod", new Vector2(32 * originalTileSize, 37 * originalTileSize), 4));
 
         UpdateCreatedObjects();
 
@@ -207,8 +221,14 @@ public class GamePanel extends JPanel implements Runnable
 
         for(Entity entity : entityList)
             if(entity.IsActive()) {
-                if(entity.IsInActiveChunk())
+                if(entity instanceof Enemy || entity instanceof Decor) {
+                    if(entity.IsInActiveChunk()) {
+                        entity.update();
+                    }
+                }
+                else
                     entity.update();
+
             }
 
         mainCamera.SetTargetChunk(activeChunkX, activeChunkY);

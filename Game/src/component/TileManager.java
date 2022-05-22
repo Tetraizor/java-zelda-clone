@@ -28,8 +28,6 @@ public class TileManager
     public int width;
     public int height;
 
-
-
     public TileManager(int mapIndex, int _width, int _height) throws IOException {
         height = _height;
         width = _width;
@@ -45,7 +43,7 @@ public class TileManager
         AddTile("Grass", 0, false); // 0: Grass
         AddTile("Sand", 1, false); // 1: Sand
         AddTile("Water", 2, true); // 2: Water
-        AddTile("Blank", 3, true); // 3: Blank
+        AddTile("Bridge", 3, false); // 3: Bridge
         AddTile("Blank", 4, true); // 4: Blank
         AddTile("Blank", 5, true); // 5: Blank
         AddTile("Blank", 6, true); // 6: Blank
@@ -103,11 +101,15 @@ public class TileManager
         int black = Color.black.getRGB();
         int red = new Color(190, 38, 51).getRGB();
         int cave = new Color(66, 66, 66).getRGB();
+        int water = new Color(49, 162, 242).getRGB();
+        int bridge = new Color(247, 226, 107).getRGB();
 
         System.out.println("White: " + white);
         System.out.println("Black: " + black);
         System.out.println("Red: " + red);
         System.out.println("Cave : " + cave);
+        System.out.println("Water: " + water);
+        System.out.println("Bridge: " + bridge);
 
         BufferedImage mapImage = ImageUtils.ReadImage("/map/map1.png");
         for(int y = 0; y < height; y++)
@@ -119,11 +121,17 @@ public class TileManager
                     case -16777216: // Black - Stone
                         map[x][y] = tileList.get(10);
                         break;
-                    case -4315597:
+                    case -4315597: // Red - Path
                         map[x][y] = tileList.get(1);
                         break;
-                    case -12434878:
+                    case -12434878: // Gray - Stone path
                         map[x][y] = tileList.get(14);
+                        break;
+                    case -13524238:
+                        map[x][y] = tileList.get(2);
+                        break;
+                    case -531861:
+                        map[x][y] = tileList.get(3);
                         break;
                     default:
                         map[x][y] = tileList.get(0);

@@ -88,8 +88,6 @@ public class Entity implements ObjectInterface
         this.name = name;
         position = _position;
         isActive = true;
-
-
     }
 
     public void CalculateActiveChunk() {

@@ -18,7 +18,7 @@ public class Main
         window.setResizable(false);
 
         // Set window name.
-        window.setTitle("Zelda");
+        window.setTitle("Topdown RPG");
 
         // Create Scene
         currentGamePanel = new GamePanel(0);

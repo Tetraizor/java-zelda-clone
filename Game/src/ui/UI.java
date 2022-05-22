@@ -28,9 +28,10 @@ public class UI
         g2.fillRect(0, 0, GamePanel.screenWidth, GamePanel.originalTileSize * 4 * GamePanel.scaleFactor);
         g2.setColor(Color.white);
 
-        g2.drawString("Umuthan", 32, 48);
+        g2.drawString("Player Name", 32, 48);
         g2.drawString("Health: " + health, 32, 48 + 48);
-        g2.drawString("Tool: " + GamePanel.player.currentTool.name, 200, 48);
+        g2.drawString("Tool: " + GamePanel.player.currentTool.name, 250, 48);
+        g2.drawString("Use Space key to attack, R key to change tools. Use WASD keys to move.", 32, 96 + 48);
 
         if(GamePanel.player.isDead) {
             g2.setColor(Color.black);
