@@ -31,11 +31,6 @@ public class Entity implements ObjectInterface
 
     public void SetActive(boolean state) {
         isActive = state;
-
-        if(state)
-            System.out.println(name + " activated.");
-        else
-            System.out.println(name + " deactivated.");
     }
 
     public enum Direction {

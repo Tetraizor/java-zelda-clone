@@ -38,7 +38,6 @@ public class PlayerTool extends EntityStationary {
         {
             if(collision.entity instanceof Enemy) {
                 ((Enemy) (collision.entity)).GetDamage(damage, invincibilityTime + .2f, knockback, player.entityDirection);
-                System.out.println(player.entityDirection);
             }
         }
     }

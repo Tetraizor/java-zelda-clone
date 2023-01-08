@@ -226,7 +226,6 @@ public class EntityMoving extends Entity{
             canHurt = false;
             health -= _damage;
             invincibilityTime = _invincibilityTime;
-            System.out.println(name + " got hurt from " + _direction + " damage! Current health is: " + health);
             Move(_knockback, _direction, 10, true);
         }
     }

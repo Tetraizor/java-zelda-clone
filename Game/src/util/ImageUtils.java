@@ -23,7 +23,6 @@ public class ImageUtils {
     }
 
     public static void SaveImage(String path, BufferedImage image) throws IOException {
-        System.out.println(path);
         File output = new File("res/" + path);
         output.createNewFile();
 

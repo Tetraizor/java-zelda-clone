@@ -41,7 +41,6 @@ public class ToolEntity extends Entity {
                     GamePanel.instance.playSound(8);
                     KillEntity(1000);
                     GamePanel.instance.pauseMusic(1300);
-                    System.out.println("AAA");
                     isTaken = true;
                 }
 

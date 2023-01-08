@@ -20,7 +20,6 @@ public class Tile
 
         try
         {
-            System.out.print(_index);
             // image = ImageIO.read(getClass().getResourceAsStream("sprite/environment/tile_" + _index + ".png"));
             image = ImageUtils.ReadImage("/sprite/environment/tile_" + String.format("%02d", _index) + ".png");
         }

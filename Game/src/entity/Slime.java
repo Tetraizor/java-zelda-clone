@@ -37,7 +37,6 @@ public class Slime extends Enemy implements ObjectInterface {
         for(Collision collision : collider.collisions) {
             if(collision.entity instanceof Player) {
                 ((Player) collision.entity).GetDamage(1, 1.6f, 0, entityDirection);
-                System.out.println("Can hurt: " + ((Player) collision.entity).canHurt);
             }
         }
 

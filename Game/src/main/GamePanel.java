@@ -128,8 +128,6 @@ public class GamePanel extends JPanel implements Runnable
                     frameTime = 0;
                     fps = frames;
                     frames = 0;
-
-                    // System.out.println("FPS: " + fps);
                 }
             }
 
